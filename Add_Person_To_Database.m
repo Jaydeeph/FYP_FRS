@@ -1,20 +1,9 @@
 %% Get Peron's Name And Ask If They Want Grayscale Images Too:
 User_Answer1 = input('Please enter the persons name: ', 's');
 User_Answer2 = input('Would you like to capture grayscale images as well? (Yes/No): ', 's');
+disp('');
+disp('');
 %% Create Directories:
-
-switch User_Answer2
-    case 'Yes'
-        booleanGrayscale = true;
-        GrayscaleLocation = strcat('FaceDatabase/', personName, '/' , personName, 'Gray');
-    case 'No'
-        booleanGrayscale = false;
-    otherwise
-        disp('Please type "Yes" or "No" only!');
-        pause(6);
-        Add_Person_To_Database;
-end
-
 personName = User_Answer1;
 
 % Checks if the FaceDatabase folder exists. 
@@ -38,6 +27,19 @@ if exist(faceDir, 'dir')
     Facial_Recognition_System_Menu;
 else
     mkdir(strcat('FaceDatabase/', personName));
+end
+
+switch User_Answer2
+    case 'Yes'
+        booleanGrayscale = true;
+        mkdir(strcat('FaceDatabase/', personName, '/' , personName, 'Gray'));
+        GrayscaleLocation = strcat('FaceDatabase/', personName, '/' , personName, 'Gray');
+    case 'No'
+        booleanGrayscale = false;
+    otherwise
+        disp('Please type "Yes" or "No" only!');
+        pause(6);
+        Add_Person_To_Database;
 end
 
 %% Create Necessary Variables:
@@ -68,6 +70,10 @@ while imCount <= 200
     % Uses the cascade object created previously to detect a face in the frame.
     % Uses the Viola-Jones algorithm.
     bbox = step(faceDetector, videoFrame);
+    
+    % Adds a rectangle shape on the face that's detected by using
+    % positions provided by bbox.
+    videoFrame = insertShape(videoFrame, 'rectangle', bbox, 'LineWidth', 5);
     
     % Gets the size of bbox, which shows how many faces are in the frame.
     bboxSize = size(bbox, 1);
