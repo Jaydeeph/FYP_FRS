@@ -111,10 +111,9 @@ release(videoPlayer);
 % Clears the variables in the workspace.
 clear;
 
-% Tells the user that face image database has successfully been created.
-% Then takes the user back to the main menu after 8 seconds.
+% 
 disp('Persons face has been successfully added to the database.');
 disp('Please wait. Taking you back to Facial Recognition System main menu.');
-pause(8);
+pause(3);
 clc;
 Facial_Recognition_System_Menu;
