@@ -55,10 +55,8 @@ end
 faceClassifier = fitcecoc(trainingFeatures, trainingLabels);
 
 %% Asks user neccassary details to send email.
-disp('If an intruder is detected. You will be emailed! Please enter your email details.');
-emailAddress = input('Please enter the email address: ', 's');
-emailPassword = input('Please enter the password for the email: ', 's');
-disp('');
+emailAddress = 'w1467093@my.westminster.ac.uk';
+emailPassword = 'QWERTYuiop123';
 
 %% Create Needed Variables And Create And Initializing VideoPlayer Object:
 
@@ -82,7 +80,7 @@ videoPlayer = vision.VideoPlayer('Position', [100 100 [frameSize(2), frameSize(1
 
 step(videoPlayer, videoFrame);
 
-%% The while loop runs until the videoplayer window is closed.
+% The while loop runs until the videoplayer window is closed.
 while runLoop
     % Acquires a frame from the webcam.
     videoFrame = snapshot(camObj);
@@ -156,6 +154,11 @@ while runLoop
         %Checks if the email was sent or not.
         if ~(emailSent)
             
+            % Credentials of the account that the email should be sent from and to.
+            % For security reasons an email will not be added.
+            emailAddress = 'w1467093@my.westminster.ac.uk';
+            emailPassword = 'QWERTYuiop123';
+            
             setpref('Internet','SMTP_Server','smtp.gmail.com');
             
             setpref('Internet','E_mail', emailAddress);
@@ -167,7 +170,7 @@ while runLoop
             props.setProperty('mail.smtp.socketFactory.port','465');
             
             textTitle = '[ALERT] Jays Facial Recognition System';
-            textBody = strcat('The person ', ...
+            textBody = strcat('The person  ', ...
                 personLabel, ...
                 ' was caught sneaking into your room!');
             
