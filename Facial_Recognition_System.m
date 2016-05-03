@@ -26,11 +26,11 @@ dimensionalityOfTheProblem = findDimensionalityOfTheProblem(1, 2);
 %% Extracts HOG Features From All Face Images That's In The Database For Training Set.
 
 % This is the variable that will keep track of all features extracted from every face image.
-trainingFeatures = zeros(size(faceDatabase, 2) * faceDatabase(1).Count, dimensionalityOfTheProblem);
+trainingFeatures = zeros(size(faceDatabase, 1) * faceDatabase(1).Count, dimensionalityOfTheProblem);
 featureCount = 1;
 
 % First for loop goes over all the folders in the database.
-for i = 1:size(faceDatabase, 2)
+for i = 1:size(faceDatabase, 1)
     % Second for loop goes over all the face images in the folder.
     for j = 1:faceDatabase(i).Count
         
